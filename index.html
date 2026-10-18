@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cehennem Otel: Son Şans</title>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#12040b;--wine:#2a0a16;--red:#ff2e4d;--gold:#f4c25b;--ink:#f6e7e1;--mut:#b88f94}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 Spectral,Georgia,serif;display:flex;justify-content:center}
+#g{width:min(920px,100%);padding:12px}
+h1{font:22px Bungee,Impact,sans-serif;color:var(--red);margin:6px 0 10px;text-shadow:0 0 14px #ff2e4d88}
+canvas{width:100%;height:auto;display:block;border:2px solid var(--red);border-radius:6px;box-shadow:0 0 30px #ff2e4d44}
+#st{display:flex;gap:14px;margin:10px 0;font-size:14px;color:var(--mut)}
+.b{flex:1}.b i{display:block;height:6px;margin-top:3px;background:var(--wine);border-radius:3px;overflow:hidden}.b u{display:block;height:100%;width:0;transition:width .5s}
+#tx{background:var(--wine);border-left:4px solid var(--gold);padding:14px 16px;min-height:150px;border-radius:4px;cursor:pointer}
+#hd{font:18px Bungee,Impact,sans-serif;color:var(--red);margin:0 0 8px}#hd.g{color:var(--gold)}#hd:empty{display:none}
+#tt{margin:0}
+#ch button{display:block;width:100%;text-align:left;margin-top:8px;padding:11px 14px;font:inherit;color:var(--ink);background:transparent;border:1.5px solid var(--red);border-radius:4px;cursor:pointer;transition:background .15s}
+#ch button:hover,#ch button:focus-visible{background:var(--red);color:#fff;outline:0}
+#ft{font-size:13px;color:var(--mut);margin:14px 0 4px}
+</style></head><body><div id="g">
+<h1>Cehennem Otel: Son Şans</h1>
+<canvas id="cv" role="img" aria-label="Hikâye sahnesi"></canvas>
+<div id="st"><div class="b">Umut<i><u id="bu" style="background:#f4c25b"></u></i></div><div class="b">Güven<i><u id="bg" style="background:#ff7aa8"></u></i></div><div class="b">Karanlık<i><u id="bk" style="background:#9b5cff"></u></i></div></div>
+<div id="tx"><h2 id="hd"></h2><p id="tt" aria-live="polite"></p></div>
+<div id="ch"></div>
+<p id="ft"><span id="mt"></span> · Yazıyı hızlandırmak için kutuya tıkla. Klavyede 1-2-3 ile seç.<br>Hazbin Hotel’den ilham alan bir hayran yapımıdır; karakterler orijinaldir.</p>
+</div>
+<script>
+const $=i=>document.getElementById(i),cv=$('cv'),x=cv.getContext('2d'),W=cv.width=920,H=cv.height=360,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let bg='s',cs='',T=0,s={u:0,g:0,k:0},f=[],tm;
+try{f=JSON.parse(localStorage.getItem('co')||'[]')}catch(e){}
+const BG={s:['#3b0714','#a3122b'],l:['#240612','#5a0f2a'],h:['#0b0210','#2a0a2e'],k:['#cfc4cc','#ff8fa3'],r:['#2b0a3d','#ff5a4d'],e:['#050205','#1c0610']};
+const PS={1:[.72],2:[.58,.82],3:[.4,.62,.84]},EM=[...Array(45)].map(()=>({x:Math.random()*W,y:Math.random()*H,v:.3+Math.random()}));
+function fig(c,w,h,bc,hc,r){const y=H-30,hy=y-h-r+6+Math.sin(T/25+c)*2;x.fillStyle=bc;x.beginPath();x.moveTo(c-w/2,y);x.lineTo(c-w/4,y-h);x.lineTo(c+w/4,y-h);x.lineTo(c+w/2,y);x.fill();x.fillStyle=hc;x.beginPath();x.arc(c,hy,r,0,7);x.fill();return hy}
+function horn(c,h,r,col){x.fillStyle=col;[-1,1].forEach(d=>{x.beginPath();x.moveTo(c+d*r*.7,h-r*.6);x.lineTo(c+d*r*1.1,h-r*1.8);x.lineTo(c+d*r*.2,h-r*.95);x.fill()})}
+function eyes(c,h,r,col){x.fillStyle=col;x.fillRect(c-r*.5,h-r*.2,r*.25,r*.3);x.fillRect(c+r*.25,h-r*.2,r*.25,r*.3)}
+function smile(c,h,r,col,w){x.strokeStyle=col;x.lineWidth=3;x.beginPath();x.arc(c,h+r*.1,r*w,.15,3);x.stroke()}
+const C={
+V(c){const h=fig(c,110,150,'#ff6f9c','#ffe4ec',32);horn(c,h,32,'#b3103a');eyes(c,h,32,'#2a0a16');smile(c,h,32,'#2a0a16',.4)},
+K(c){const h=fig(c,150,175,'#3c3340','#8a7f8c',36);horn(c,h,36,'#1a1420');x.fillStyle='#111';x.fillRect(c-22,h-8,16,10);x.save();x.shadowColor='#b66cff';x.shadowBlur=20;x.fillStyle='#c58bff';x.beginPath();x.arc(c+13,h-2,7+Math.sin(T/15)*1.5,0,7);x.fill();x.restore()},
+F(c){const h=fig(c,70,235,'#12343a','#1f5560',27);x.strokeStyle='#ffd95a';x.lineWidth=2;for(let i=1;i<4;i++){x.globalAlpha=.8-i*.2+Math.sin(T/10-i)*.1;x.beginPath();x.arc(c,h-8,16+i*11,3.6,5.8);x.stroke()}x.globalAlpha=1;eyes(c,h,27,'#ffd95a');smile(c,h,27,'#ffd95a',.8)},
+S(c){x.fillStyle='#fffaf0cc';[-1,1].forEach(d=>{x.beginPath();x.moveTo(c+d*20,H-230);x.lineTo(c+d*150,H-310+Math.sin(T/20)*8);x.lineTo(c+d*110,H-110);x.fill()});const h=fig(c,90,170,'#fff4dc','#ffe9c4',28);x.strokeStyle='#f4c25b';x.lineWidth=4;x.beginPath();x.ellipse(c,h-44,26,7,0,0,7);x.stroke();x.beginPath();x.moveTo(c+60,H-30);x.lineTo(c+60,H-300);x.stroke();eyes(c,h,28,'#7a2b00')},
+C(c){const h=fig(c,130,105,'#6b2a1a','#b5532f',30);horn(c,h,30,'#2b0d08');eyes(c,h,30,'#ffe14d');x.strokeStyle='#ccc';x.lineWidth=5;x.beginPath();x.arc(c+70,H-110,24,3.5,6.2);x.stroke()},
+P(c){const h=fig(c,140,95,'#c9a227','#e8c75a',30);x.fillStyle='#fff3b0';x.beginPath();x.arc(c-9,h-2,7,0,7);x.arc(c+11,h-2,7,0,7);x.fill();smile(c,h,30,'#5a3b00',.4)}};
+(function L(){if(!rm)T++;const c=BG[bg],gr=x.createLinearGradient(0,0,0,H);gr.addColorStop(0,c[0]);gr.addColorStop(1,c[1]);x.fillStyle=gr;x.fillRect(0,0,W,H);
+x.fillStyle=bg=='k'?'#fff7':'#ff2e4d44';x.beginPath();x.arc(780,90,48+Math.sin(T/40)*3,0,7);x.fill();
+if(bg=='k'){x.fillStyle='#fff3';for(let i=0;i<4;i++)x.fillRect(120+i*220+Math.sin(T/30+i)*10,0,26,H)}
+x.fillStyle='#09020a';
+if(bg=='l'||bg=='h'){for(let i=0;i<9;i++){x.fillStyle='#ffffff0d';x.fillRect(i*115+20,80,60,220)}x.fillStyle='#09020a'}
+else for(let i=0;i<14;i++){const bh=60+(i*37%90);x.fillRect(i*70,H-bh-30,56,bh+30)}
+x.fillRect(0,H-30,W,30);
+if('slr'.includes(bg)){x.globalAlpha=T%97<4?.3:1;x.fillStyle='#ff2e4d';x.shadowColor='#ff2e4d';x.shadowBlur=20;x.font='26px Bungee,Impact,sans-serif';x.textAlign='center';x.fillText('CEHENNEM OTEL',270,56);x.shadowBlur=0;x.globalAlpha=1}
+const xs=PS[cs.length]||[];[...cs].forEach((ch,j)=>C[ch](W*xs[j]));
+x.fillStyle='#ffb347aa';EM.forEach(p=>{if(!rm){p.y-=p.v;p.x+=Math.sin(T/30+p.v*9)*.4}if(p.y<0)p.y=H;x.fillRect(p.x,p.y,2,2)});
+requestAnimationFrame(L)})();
+const S={
+I:{b:'s',c:'VKF',t:"Ölüm bitiş değildir; bazen sadece kapının değişmesidir. Cehennem’in en umutsuz köşesinde, herkese ikinci şans veren bir otel var. Seçimlerin Umut, Güven ve Karanlık’ı değiştirecek — ve sonu sen yazacaksın. Dokuz farklı son seni bekliyor.",o:[["Hikâyeyi başlat",0,0,0,0]]},
+0:{b:'s',t:"Gözlerini açıyorsun. Gökyüzü kızıl, hava kül kokuyor. Ölmüşsün — ve Cehennem’in Küllük Sokağı’na düşmüşsün. Uzakta kırmızı neonla yazılmış bir tabela yanıp sönüyor: CEHENNEM OTEL — HERKESE İKİNCİ ŞANS. Arkandan ağır, ıslak ayak sesleri yaklaşıyor.",o:[["Tabelaya doğru var gücünle koş",1,1,0,0],["Arkanı dön ve ne olduğuna bak",2,0,0,1]]},
+1:{b:'l',c:'V',t:"Otelin kapısından yüzüstü içeri yuvarlanıyorsun. Pembe neonlu lobide gülümseyen bir şeytan kız sana elini uzatıyor. “Ben Vesper, otelin sahibiyim! Yeni misafir mi? Harika!” Dışarıda çetenin yumrukları kapıya iniyor. “Ah, ve şu kapı çok uzun dayanmaz.”",o:[["“Beni sakla, lütfen. Sana güveniyorum.”",3,0,1,0],["“Kapıyı ben tutarım. Sen kaç.”",3,1,0,1]]},
+2:{b:'s',c:'C',t:"Karşında kambur bir şeytan sırıtıyor: Çengel, Küllük çetesinin başı. Elindeki kanca ışıkta parlıyor. “Taze ruh! Cennet’in casuslarını arıyoruz. Şu otelin sığınağını bize göster, sana kimse dokunmaz. Hatta bize katılırsın.”",o:[["Anlaşmayı kabul et",'B1',0,0,3],["“Cehenneme git.” de ve otele doğru kaç",1,1,0,0]]},
+3:{b:'l',c:'VK',t:"Vesper seni kanepenin arkasına çekiyor. Tek gözlü, kaslı muhafız Kül kapıyı kilitleyip barikat kuruyor; çete homurdanarak dağılıyor. Vesper hızlı hızlı anlatıyor: “Burada günahkârlar yeniden dönüşüyor! Amacım hepsini bir gün Cennet’e kabul ettirmek. Herkes bana deli diyor ama ben inanıyorum.” Gözleri umutla parlıyor.",o:[["“Bu çok güzel bir fikir. Yardım edeyim.”",4,2,1,0],["“Cehennem cehennemdir. Bu işe yaramaz.”",4,-1,0,1],["“Önce bir yatak. Sonra kurtuluş.”",4,0,1,0]]},
+4:{b:'h',c:'K',t:"Gece, koridorda Kül seni durduruyor. Boş göz yuvasında mor bir taş titreşiyor. “Gözümü Cennet’in ilk saldırısında kaybettim. Bu taş onun yerine geçti. Gücüm ona bağlı. Onu benden ayıran herkes ölür.” Bunu bir tehdit gibi söylüyor… ama sesi garip biçimde yorgun.",o:[["“Çok acı çekmişsin.” Yanına otur",5,1,2,0],["“Tehdit etmeyi bırak. Kimse gözünü istemiyor.”",5,0,-1,0],["Hiçbir şey söyleme, geç git",5,0,0,0]]},
+5:{b:'h',c:'F',t:"Sabah koridorda radyo parazitine benzeyen bir ses seni karşılıyor. Uzun boylu, ince, kocaman sırıtışlı biri: Fısıltı, otelin “yayıncısı”. “Yeni arkadaşım! Burada her şeyi bilirim. Sana bir sır satayım mı? Karşılığında küçük, çok küçük bir iyilik.” Sarı gözleri seni ölçüyor.",o:[["Sırrı dinle (iyilik borcu al)",6,0,-1,1],["“Kimseye borçlanmam.” Vesper’e git",7,0,1,0]]},
+6:{b:'h',c:'F',t:"Fısıltı eğiliyor: “Cennet bu gece saldıracak. Meleklerin ‘arınma’ planı var. Otel kurtulabilir — ama Kül’ün taşını bana getirirsen. Onsuz Kül zayıf; onunla ben herkesi korurum. Söz.” Sırıtışı biraz fazla geniş.",o:[["Gece Kül’ün odasına gir ve taşı al",8,0,-2,3],["“Bu kokuyor.” Vesper’e hepsini anlat",7,1,1,0]]},
+7:{b:'l',c:'VP',t:"Öğleden sonra ilk dönüşüm seansı. Misafirler sandalyelerle halka kurmuş. Eski bir banker, açgözlü Bay Pas, altın kesesini sıkıyor. Vesper şarkı söylercesine açıyor: “Her biri bir günahını itiraf etsin! Önce sen — yeni misafir!” Bütün gözler üstünde.",o:[["Gerçek günahını açıkça itiraf et",'M',2,2,0],["Yalan söyle, yırt",'M',0,-1,1],["Bay Pas’ın yanına otur, ona destek ol",'M',1,1,0]]},
+M:{b:'l',c:'VKP',t:"Seans biter bitmez bağırışlar yükseliyor: Bay Pas’ın altın kesesi kayıp! Misafirler birbirini suçluyor, Kül yumruklarını sıkıyor, Vesper araya girmeye çalışıyor. Odadaki herkes sana bakıyor — yeni geldin, üstelik ilk seansta ilginç davrandın.",o:[["Herkesi tek tek sorguya çek",9,0,-1,1],["“Sakin olun. Birlikte arayalım.”",9,1,2,0],["Kesenin Bay Pas’ın şapkasında olduğunu fark et ve şaka yap",9,1,1,0]]},
+8:{b:'h',c:'KF',t:"Gece, Kül’ün odası. Taş komodinde mor bir ateş gibi titriyor. Parmakların ona değer değmez Kül’ün tek gözü açılıyor. Karanlıkta sessizce, tehlikeli biçimde: “Sana güvenmiştim.” Kapıda Fısıltı’nın gölgesi beliriyor, eli uzanmış.",o:[["Taşı Fısıltı’ya fırlat, kaç",'B2',0,-3,3],["Taşı bırak ve gerçeği anlat",9,1,2,-1]]},
+9:{b:'r',c:'V',t:"Akşam. Çatıda Vesper yalnız oturuyor, kızıl gökyüzüne bakıyor. “Bazen kimsenin gelmeyeceğinden korkuyorum,” diyor sessizce. “Ya bu otel sadece benim hayalimse? Ya hepsi boşunaysa?” Aşağıdan misafirlerin kahkahası duyuluyor.",o:[["“Hayal değil. Ben buradayım.”",10,2,2,0],["“Belki hayaldir. Gerçekçi ol.”",10,-2,-1,1],["Şakayla konuyu değiştir",10,0,1,0]]},
+10:{b:'k',c:'S',t:"Gece yarısı gökyüzü yarılıyor. Beyaz ışık sütunları Cehennem’e iniyor. Kanatlı komutan Sera otelin tepesinde süzülüyor. “Arınma saati geldi. Bu binadaki her ruh silinecek. Ama içinizden biri bana kapıyı açarsa, diğerleri affedilir.” Yer sarsılıyor; misafirler çığlık atıyor.",o:[["Dışarı çık, meleğe meydan oku",11,1,0,1],["Misafirleri servis merdivenine yönlendir",12,1,2,0],["Meleğin teklifini bir kez dinle",13,-1,-2,2]]},
+11:{b:'k',c:'SVK',t:"Sokağa çıkıyorsun. Sera kanatlarını açıyor; mızrağının ucundan altın ışık damlıyor. “Bir günahkâr benimle konuşmak mı istiyor?” Arkanda Vesper ile Kül dizilmiş. Vesper’in elleri titriyor ama çenesi dik.",o:[["“Bu insanlar değişiyor. Gel, kendin gör.”",14,2,1,0],["Önce sen saldır: mızrağını kap",14,0,-1,2],["Diz çök, yalvar",14,-1,0,0]]},
+12:{b:'h',c:'KP',t:"Kül servis kapısını omzuyla tutuyor; sen misafirleri tek tek merdivenden aşağı sürüyorsun. Bay Pas bir yandan ağlıyor, bir yandan altın kasasına sarılıyor: “Bunu bırakmam!” Tavan çatırdıyor.",o:[["Kasayı elinden çek: “Hayatın daha değerli.”",14,1,1,0],["Kasayı onunla taşı, vakit kaybet",14,-1,0,1]]},
+13:{b:'k',c:'SV',t:"Sera yüzünü sana yaklaştırıyor, sesi ipek gibi: “Vesper’i bana ver. Otelin kalbi o. Karşılığında seni Cennet’e alırız, bu gece. Düşün: bir daha hiç acı yok.” Aşağıda Vesper adını fısıldıyor: “…sen mi?”",o:[["Vesper’i teslim et",'B3',-2,-3,3],["“Hayır.” Teklifi reddet",14,2,1,-1]]},
+14:{b:'k',c:'FVS',t:"Çatışmanın ortasında Fısıltı beliriyor; gülüşü radyo parazitiyle karışıyor. “Bu savaşı bir şarkıda bitirebilirim. Bedeli: otelin ruhu. Yani Vesper’in hayali. Fena değil, değil mi?” Vesper bir adım geri atıyor. Herkes sana bakıyor.",o:[["“Hayır. Güç karşılığında ruh satmayız.”",15,1,1,-1],["Teklifi kabul et",15,-1,-1,3],["Kararı Vesper’e bırak",15,1,2,0]]},
+15:{b:'r',c:'VK',t:"Işık sönüyor. Gökyüzü yeniden kızıl; otel yarı yıkık. Duvarlar duman tütüyor ama içeride hâlâ sesler var: misafirler, Kül, Vesper. Herkes sana dönüyor. Vesper bitkin gülümsüyor: “Peki… şimdi ne yapacağız?”",o:[["Hep birlikte yeniden inşa edelim",'end',2,2,0],["Cennet’e mektup yaz: dönüşümü kanıtla",'end',2,0,0],["Yönetimi üstlen, kurallar senin olsun",'end',0,-1,2]]},
+B1:{b:'e',n:"İhanetin Bedeli",q:"Kötü son",t:"Çeteyi otelin sığınağına götürüyorsun. Vesper’in şarkısı tek bir çığlığa dönüşüyor. Çengel omzuna vuruyor: “İyi köpek.” Ama Cehennem’de kimse sadık köpeklere teşekkür etmez; ertesi sabah zincirlerle uyanıyorsun. Otel yok. Umut yok. Sadece sen ve sonsuz Küllük."},
+B2:{b:'e',n:"Fısıltı’nın Piyonu",q:"Kötü son",t:"Taşı Fısıltı’ya fırlatıyorsun. Mor ışık patlıyor; Kül yere yığılıyor. Fısıltı taşı avucunda sıkarken kahkahası koridorları dolduruyor: “Otel artık yayında!” Sabah herkes sırıtıyor — ve sırıtmayı bırakamıyor. Sen de dahil."},
+B3:{b:'e',n:"Soğuk Cennet",q:"Kötü son",t:"Vesper’i meleğe teslim ediyorsun. Işık seni yutuyor. Cennet’te beyaz, sessiz bir koridorda uyanıyorsun. Kimse konuşmuyor, kimse gülmüyor. Çok aşağıda kızıl bir neon bir an yanıp sönüyor ve sönüyor. Kurtuldun… ama neye karşılık?"},
+D:{b:'e',n:"Karanlığın Efendisi",q:"Kötü son",t:"Otel yeniden ayakta ama farklı. Neon artık pembe değil, kan kırmızı. Kuralları sen koyuyorsun; misafirler gülüyor çünkü gülmek zorunda. Vesper çatıda sessiz, Kül başını eğmiş. Güçlüsün. Sevilmiyorsun. Cehennem seni kendi çocuğu sayıyor."},
+A:{b:'e',n:"Küllerin Sabahı",q:"Kötü son",t:"Umutsuz bir sabah. Misafirler tek tek çantalarını topluyor. Vesper kapıyı kapatırken tabelayı usulca söküyor. Duman yükseliyor. Otel susuyor; Cehennem, geri kalan her şey gibi, aynı kalıyor."},
+Y:{b:'e',n:"Yalnız Kapı",q:"Kötü son",t:"Kimse sana güvenmiyor. Savaştan sağ çıktın ama herkes odasına çekilmiş. Yemek masasında senin sandalyen boş. Otel yaşıyor; sen ise eşikte, içeri girmeyi bekliyorsun. Kimse seni çağırmıyor."},
+Z:{b:'r',c:'VKP',n:"Herkese İkinci Şans",q:"İyi son",t:"Güneş yok ama sabah gibi bir şey doğuyor. Misafirler duvarlara yeni boyalar sürüyor; Kül omzuna vuruyor, Bay Pas altınını otele bağışlıyor. Vesper sana ilk anahtarı veriyor: “Artık sen de buranın evisin.” Neon yeniden yanıyor, bu sefer bütün Cehennem görsün diye. Cennet’ten bir mektup geliyor: “İncelemeye alındı.” Bu kadarı bile bir mucize."},
+G:{b:'r',c:'VK',n:"Kırık Ama Yaşayan Otel",q:"İyi son",t:"Otel çatırdıyor, tavan bir yerde hâlâ açık. Ama kapı yine açık, misafirler yine içeride. Vesper yeni bir plan çiziyor, Kül çekiç sallıyor. Hayat zor; ama burada her sabah biri kendine ikinci şans veriyor. Bu yeter."},
+N:{b:'r',c:'V',n:"Gri Şafak",q:"Belirsiz son",t:"Otel ayakta. Herkes hayatta. Ama kimse gerçekten kimseye güvenmiyor. Vesper gülümsüyor, gözleri uzakta. İyi mi kötü mü, kimse bilmiyor. Şafak geliyor, Cehennem’de olduğu kadar."}};
+function type(t,done){clearInterval(tm);const el=$('tt');el.textContent='';let j=0;const fin=()=>{clearInterval(tm);el.textContent=t;done&&done();done=null};
+$('tx').onclick=fin;if(rm)return fin();tm=setInterval(()=>{el.textContent=t.slice(0,++j);j>=t.length&&fin()},16)}
+function go(i){
+if(i=='end'){const{u,g,k}=s;i=k>=6?'D':u<=2?'A':g<=1?'Y':u>=9&&g>=7&&k<=2?'Z':u>=5?'G':'N'}
+const n=S[i],h=$('hd');bg=n.b;cs=n.c||'';$('ch').innerHTML='';
+h.textContent=n.n?n.n+' — '+n.q:'';h.className=n.q=='İyi son'?'g':'';
+if(n.n)try{if(!f.includes(i)){f.push(i);localStorage.setItem('co',JSON.stringify(f))}}catch(e){}
+$('mt').textContent='Bulunan sonlar: '+f.length+' / 9';
+type(n.t,()=>(n.o||[["Yeniden oyna",'I',0,0,0,1]]).forEach((o,j)=>{const b=document.createElement('button');b.textContent=(j+1)+'. '+o[0];b.onclick=()=>{if(o[5])s={u:0,g:0,k:0};s.u+=o[2];s.g+=o[3];s.k+=o[4];bars();go(o[1])};$('ch').append(b)}))}
+function bars(){['u','g','k'].forEach(a=>$('b'+a).style.width=Math.max(0,Math.min(100,s[a]*9))+'%')}
+addEventListener('keydown',e=>{const b=$('ch').children[e.key-1];b&&b.click()});
+bars();go('I');
+</script></body></html>
